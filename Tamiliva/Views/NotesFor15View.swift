@@ -22,8 +22,6 @@ struct NotesFor15View: View {
         return notes.filter { $0.fav.contains("♥︎") }
     }
     
-    
-    
     var body: some View {
         
         NavigationView {

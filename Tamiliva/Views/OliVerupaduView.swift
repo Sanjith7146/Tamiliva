@@ -53,336 +53,167 @@ struct OliVerupaduView: View {
     
     @available(iOS 16.0, *)
     var body: some View {
-        if #available(iOS 16.0, *) {
-            NavigationView {
-                VStack(alignment: .leading) {
-                    SearchBar(text: $searchText)
-                        .padding(.top, 8)
-                        .padding(.bottom, 5)
-                        .padding([.leading, .trailing])
-                        .hidden()
-                    
-                    
-                    List{
-                        Section(header: Text("Favourites")){
-                            ForEach(filteredFavOli) { oli2 in
-                                NavigationLink(destination: OliCompareView(oli: $oli, singleOli: self.getIndexOf(oli2), tamil10: oli2.tamil1, tamil20: oli2.tamil2, tamil30: oli2.tamil3, english10: oli2.english1, english20: oli2.english2, english30: oli2.english3)){
+        NavigationView {
+            VStack(alignment: .leading) {
+                SearchBar(text: $searchText)
+                    .padding(.top, 8)
+                    .padding(.bottom, 5)
+                    .padding([.leading, .trailing])
+                    .hidden()
+                
+                
+                List{
+                    Section(header: Text("Favourites")){
+                        ForEach(filteredFavOli) { oli2 in
+                            NavigationLink(destination: OliCompareView(oli: $oli, singleOli: self.getIndexOf(oli2), tamil10: oli2.tamil1, tamil20: oli2.tamil2, tamil30: oli2.tamil3, english10: oli2.english1, english20: oli2.english2, english30: oli2.english3)){
+                                
+                                if oli2.tamil3 != "-"{
                                     
-                                    if oli2.tamil3 != "-"{
+                                    
+                                    HStack{
+                                        Text("\(oli2.tamil1) / \(oli2.tamil2) / \(oli2.tamil3)")
+                                            .font(.system(size: 16))
+                                            .foregroundColor(Color(red:0.0, green: 0.0, blue: 0.0))
+                                            .fontWeight(.thin)
                                         
-                                            
-                                        HStack{
-                                            Text("\(oli2.tamil1) / \(oli2.tamil2) / \(oli2.tamil3)")
-                                                .font(.system(size: 16))
-                                                .foregroundColor(Color(red:0.0, green: 0.0, blue: 0.0))
-                                                .fontWeight(.thin)
-                                            
-                                            
-                                            Spacer()
-                                            Button {
-                                                withAnimation{
-                                                    for (index, i) in oli.enumerated() {
-                                                        if oli2.id == i.id {
-                                                            self.oli[index].fav = "♡"
-                                                            print(oli[index].fav)
-                                                            indexOfOli = self.oli[index].sn
-                                                            print(indexOfOli)
-                                                        }
+                                        
+                                        Spacer()
+                                        Button {
+                                            withAnimation{
+                                                for (index, i) in oli.enumerated() {
+                                                    if oli2.id == i.id {
+                                                        self.oli[index].fav = "♡"
+                                                        print(oli[index].fav)
+                                                        indexOfOli = self.oli[index].sn
+                                                        print(indexOfOli)
                                                     }
                                                 }
-                                            } label: {
-                                                Text("♥︎")
-                                                    .foregroundColor(.red)
-                                                    .font(.system(size: 30))
                                             }
-                                            Text("")
+                                        } label: {
+                                            Text("♥︎")
+                                                .foregroundColor(.red)
+                                                .font(.system(size: 30))
                                         }
+                                        Text("")
+                                    }
                                     
-                                    }
-
-                                    if oli2.tamil3 == "-"{
-                                        
-                                        HStack{
-                                            
-                                            Text("\(oli2.tamil1) / \(oli2.tamil2)")
-                                                .font(.system(size: 16))
-                                                .foregroundColor(Color(red:0.0, green: 0.0, blue: 0.0))
-                                                .fontWeight(.thin)
-                                            Spacer()
-                                            Button {
-                                                withAnimation{
-                                                    for (index, i) in oli.enumerated() {
-                                                        if oli2.id == i.id {
-                                                            self.oli[index].fav = "♡"
-                                                            print(oli[index].fav)
-                                                            indexOfOli = self.oli[index].sn
-                                                            print(indexOfOli)
-                                                        }
-                                                    }
-                                                }
-                                            } label: {
-                                                Text("♥︎")
-                                                    .foregroundColor(.red)
-                                                    .font(.system(size: 30))
-                                            }
-                                            Text("")
-                                        }
-                                        
-                                    }
                                 }
                                 
-                            }
-                            .listRowBackground(Color(hue: 0.581, saturation: 0.059, brightness: 1))
-                        }
-                        .font(.system(size: 20))
-                        .foregroundColor(Color(red: 25/255, green: 66/255, blue: 126/255))
-                        .fontWeight(.semibold)
-                        .textCase(nil)
-                        
-                        Section(header: Text("All")){
-                            ForEach(filteredOli) { oli1 in
-                                NavigationLink(destination: OliCompareView(oli: $oli, singleOli: self.getIndexOf(oli1), tamil10: oli1.tamil1, tamil20: oli1.tamil2, tamil30: oli1.tamil3, english10: oli1.english1, english20: oli1.english2, english30: oli1.english3)){
-                                    if oli1.tamil3 != "-"{
-                                        
-                                        HStack{
-                                            Text("\(oli1.tamil1) / \(oli1.tamil2) / \(oli1.tamil3)")
-                                                .font(.system(size: 16))
-                                                .foregroundColor(Color(red:0.0, green: 0.0, blue: 0.0))
-                                                .fontWeight(.thin)
-                                            Spacer()
-                                            Button {
-                                                print("working")
-                                                withAnimation{
-                                                    for (index, i) in oli.enumerated() {
-                                                        if oli1.id == i.id {
-                                                            self.oli[index].fav = "♥︎"
-                                                            print(oli[index].fav)
-                                                        }
-                                                    }
-                                                }
-                                                print(oliFav1)
-                                            }label: {
-                                                Text("♡")
-                                                    .foregroundColor(.black)
-                                                    .font(.system(size: 30))
-                                            }
-                                            Text("")
-                                        }
-                                    }else if oli1.tamil3 == "-"{
-                                        
-                                        HStack{
-                                            Text("\(oli1.tamil1) / \(oli1.tamil2)")
-                                                .font(.system(size: 16))
-                                                .foregroundColor(Color(red:0.0, green: 0.0, blue: 0.0))
-                                                .fontWeight(.thin)
-                                            Spacer()
-                                            Button {
-                                                print("working")
-                                                withAnimation{
-                                                    for (index, i) in oli.enumerated() {
-                                                        if oli1.id == i.id {
-                                                            self.oli[index].fav = "♥︎"
-                                                            print(oli[index].fav)
-                                                        }
-                                                    }
-                                                }
-                                            } label: {
-                                                Text("♡")
-                                                    .foregroundColor(.black)
-                                                    .font(.system(size: 30))
-                                            }
-                                            Text("")
-                                        }
-                                    }
-                                }
-                            }
-                            .listRowBackground(Color(hue: 0.581, saturation: 0.059, brightness: 1))
-                        }
-                        .font(.system(size: 20))
-                        .foregroundColor(Color(red: 25/255, green: 66/255, blue: 126/255))
-                        .fontWeight(.semibold)
-                        .textCase(nil)
-                    }
-                    
-                    .buttonStyle(.plain)
-                    .navigationBarTitle(Text("Oli Verupadu"))
-                    .background(.clear)
-                    .scrollContentBackground(.hidden)
-                }.onAppear{
-                    print(notOliFav1)
-                    print(oliFav1)
-                    
-                }
-            }
-            .navigationViewStyle(DefaultNavigationViewStyle())
-        } else {
-            NavigationView {
-                VStack(alignment: .leading) {
-                    SearchBar(text: $searchText)
-                        .padding(.top, 8)
-                        .padding(.bottom, 5)
-                        .padding([.leading, .trailing])
-                        .hidden()
-                    
-                    
-                    List{
-                        Section(header: Text("Favourites")){
-                            ForEach(filteredFavOli) { oli2 in
-                                NavigationLink(destination: OliCompareView(oli: $oli, singleOli: self.getIndexOf(oli2), tamil10: oli2.tamil1, tamil20: oli2.tamil2, tamil30: oli2.tamil3, english10: oli2.english1, english20: oli2.english2, english30: oli2.english3)){
+                                if oli2.tamil3 == "-"{
                                     
-                                    if oli2.tamil3 != "-"{
-                                        HStack{
-                                            Text("\(oli2.tamil1) / \(oli2.tamil2) / \(oli2.tamil3)")
-                                                .font(.system(size: 16))
-                                                .foregroundColor(Color(red:0.0, green: 0.0, blue: 0.0))
-                                                .fontWeight(.thin)
-                                            Spacer()
-                                            Button {
-                                                withAnimation{
-                                                    for (index, i) in oli.enumerated() {
-                                                        if oli2.id == i.id {
-                                                            self.oli[index].fav = "♡"
-                                                            print(oli[index].fav)
-                                                            indexOfOli = self.oli[index].sn
-                                                            print(indexOfOli)
-                                                        }
+                                    HStack{
+                                        
+                                        Text("\(oli2.tamil1) / \(oli2.tamil2)")
+                                            .font(.system(size: 16))
+                                            .foregroundColor(Color(red:0.0, green: 0.0, blue: 0.0))
+                                            .fontWeight(.thin)
+                                        Spacer()
+                                        Button {
+                                            withAnimation{
+                                                for (index, i) in oli.enumerated() {
+                                                    if oli2.id == i.id {
+                                                        self.oli[index].fav = "♡"
+                                                        print(oli[index].fav)
+                                                        indexOfOli = self.oli[index].sn
+                                                        print(indexOfOli)
                                                     }
                                                 }
-                                            } label: {
-                                                Text("♥︎")
-                                                    .foregroundColor(.red)
-                                                    .font(.system(size: 30))
                                             }
-                                            Text("")
+                                        } label: {
+                                            Text("♥︎")
+                                                .foregroundColor(.red)
+                                                .font(.system(size: 30))
                                         }
-                                    }
-                                    if oli2.tamil3 == "-"{
-                                        
-                                        HStack{
-                                            
-                                            Text("\(oli2.tamil1) / \(oli2.tamil2)")
-                                                .font(.system(size: 16))
-                                                .foregroundColor(Color(red:0.0, green: 0.0, blue: 0.0))
-                                                .fontWeight(.thin)
-                                            Spacer()
-                                            Button {
-                                                withAnimation{
-                                                    for (index, i) in oli.enumerated() {
-                                                        if oli2.id == i.id {
-                                                            self.oli[index].fav = "♡"
-                                                            print(oli[index].fav)
-                                                            indexOfOli = self.oli[index].sn
-                                                            print(indexOfOli)
-                                                        }
-                                                    }
-                                                }
-                                            } label: {
-                                                Text("♥︎")
-                                                    .foregroundColor(.red)
-                                                    .font(.system(size: 30))
-                                            }
-                                            Text("")
-                                        }
-                                        
-                                    }
-                                }
-                            }
-                            .listRowBackground(Color(hue: 0.581, saturation: 0.059, brightness: 1))
-                        }
-                        .font(.system(size: 20))
-                        .foregroundColor(Color(red: 25/255, green: 66/255, blue: 126/255))
-                        .fontWeight(.semibold)
-                        .textCase(nil)
-                        
-                        Section(header: Text("All")){
-                            ForEach(filteredOli) { oli1 in
-                                NavigationLink(destination: OliCompareView(oli: $oli, singleOli: self.getIndexOf(oli1), tamil10: oli1.tamil1, tamil20: oli1.tamil2, tamil30: oli1.tamil3, english10: oli1.english1, english20: oli1.english2, english30: oli1.english3)){
-                                    if oli1.tamil3 != "-"{
-                                        
-                                        HStack{
-                                            Text("\(oli1.tamil1) / \(oli1.tamil2) / \(oli1.tamil3)")
-                                                .font(.system(size: 16))
-                                                .foregroundColor(Color(red:0.0, green: 0.0, blue: 0.0))
-                                                .fontWeight(.thin)
-                                            Spacer()
-                                            Button {
-                                                print("working")
-                                                withAnimation{
-                                                    for (index, i) in oli.enumerated() {
-                                                        if oli1.id == i.id {
-                                                            self.oli[index].fav = "♥︎"
-                                                            print(oli[index].fav)
-                                                        }
-                                                    }
-                                                }
-                                                print(oliFav1)
-                                            }label: {
-                                                Text("♡")
-                                                    .foregroundColor(.black)
-                                                    .font(.system(size: 30))
-                                            }
-                                            Text("")
-                                        }
-                                    }else if oli1.tamil3 == "-"{
-                                        
-                                        HStack{
-                                            Text("\(oli1.tamil1) / \(oli1.tamil2)")
-                                                .font(.system(size: 16))
-                                                .foregroundColor(Color(red:0.0, green: 0.0, blue: 0.0))
-                                                .fontWeight(.thin)
-                                                
-                                                
-                                            Spacer()
-                                            Button {
-                                                print("working")
-                                                withAnimation{
-                                                    for (index, i) in oli.enumerated() {
-                                                        if oli1.id == i.id {
-                                                            self.oli[index].fav = "♥︎"
-                                                            print(oli[index].fav)
-                                                        }
-                                                    }
-                                                }
-                                            } label: {
-                                                Text("♡")
-                                                    .foregroundColor(.black)
-                                                    .font(.system(size: 30))
-                                                    .fontWeight(.ultraLight)
-                                            }
-                                            Text("")
-                                        }
-                                        
+                                        Text("")
                                     }
                                     
                                 }
-                                .frame(height:100000000)
                             }
-                            .listRowBackground(Color(hue: 0.581, saturation: 0.059, brightness: 1))
                             
                         }
-                        .font(.system(size: 20))
-                        .foregroundColor(Color(red: 25/255, green: 66/255, blue: 126/255))
-                        .fontWeight(.semibold)
-                        .textCase(nil)
+                        .listRowBackground(Color(hue: 0.581, saturation: 0.059, brightness: 1))
                     }
-                        
-                    .buttonStyle(.plain)
-                    .navigationBarTitle(Text("Oli Verupadu"))
-                    .background(.clear)
-                    .scrollContentBackground(.hidden)
+                    .font(.system(size: 20))
+                    .foregroundColor(Color(red: 25/255, green: 66/255, blue: 126/255))
+                    .fontWeight(.semibold)
+                    .textCase(nil)
                     
-                }.onAppear{
-                    print(notOliFav1)
-                    print(oliFav1)
-                    
+                    Section(header: Text("All")){
+                        ForEach(filteredOli) { oli1 in
+                            NavigationLink(destination: OliCompareView(oli: $oli, singleOli: self.getIndexOf(oli1), tamil10: oli1.tamil1, tamil20: oli1.tamil2, tamil30: oli1.tamil3, english10: oli1.english1, english20: oli1.english2, english30: oli1.english3)){
+                                if oli1.tamil3 != "-"{
+                                    
+                                    HStack{
+                                        Text("\(oli1.tamil1) / \(oli1.tamil2) / \(oli1.tamil3)")
+                                            .font(.system(size: 16))
+                                            .foregroundColor(Color(red:0.0, green: 0.0, blue: 0.0))
+                                            .fontWeight(.thin)
+                                        Spacer()
+                                        Button {
+                                            print("working")
+                                            withAnimation{
+                                                for (index, i) in oli.enumerated() {
+                                                    if oli1.id == i.id {
+                                                        self.oli[index].fav = "♥︎"
+                                                        print(oli[index].fav)
+                                                    }
+                                                }
+                                            }
+                                            print(oliFav1)
+                                        }label: {
+                                            Text("♡")
+                                                .foregroundColor(.black)
+                                                .font(.system(size: 30))
+                                        }
+                                        Text("")
+                                    }
+                                }else if oli1.tamil3 == "-"{
+                                    
+                                    HStack{
+                                        Text("\(oli1.tamil1) / \(oli1.tamil2)")
+                                            .font(.system(size: 16))
+                                            .foregroundColor(Color(red:0.0, green: 0.0, blue: 0.0))
+                                            .fontWeight(.thin)
+                                        Spacer()
+                                        Button {
+                                            print("working")
+                                            withAnimation{
+                                                for (index, i) in oli.enumerated() {
+                                                    if oli1.id == i.id {
+                                                        self.oli[index].fav = "♥︎"
+                                                        print(oli[index].fav)
+                                                    }
+                                                }
+                                            }
+                                        } label: {
+                                            Text("♡")
+                                                .foregroundColor(.black)
+                                                .font(.system(size: 30))
+                                        }
+                                        Text("")
+                                    }
+                                }
+                            }
+                        }
+                        .listRowBackground(Color(hue: 0.581, saturation: 0.059, brightness: 1))
+                    }
+                    .font(.system(size: 20))
+                    .foregroundColor(Color(red: 25/255, green: 66/255, blue: 126/255))
+                    .fontWeight(.semibold)
+                    .textCase(nil)
                 }
+                
+                .buttonStyle(.plain)
+                .navigationBarTitle(Text("Oli Verupadu"))
+                .background(.clear)
+                .scrollContentBackground(.hidden)
+            }.onAppear{
+                print(notOliFav1)
+                print(oliFav1)
+                
             }
-            .navigationViewStyle(DefaultNavigationViewStyle())
         }
-        
-        
-        
-        
+        .navigationViewStyle(DefaultNavigationViewStyle())
         
     }
     

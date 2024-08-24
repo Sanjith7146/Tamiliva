@@ -26,7 +26,8 @@ struct CircularProgressView: View {
                                     ))
                 .foregroundColor(Color(red: 0.45098039215686275, green: 0.6313725490196078, blue: 0.9803921568627451))
                 .rotationEffect(Angle(degrees: 270.0))
-                .animation(Animation.spring(response: 2.0, dampingFraction: 1.0, blendDuration: 1.0))        }
+                .animation(Animation.spring(response: 2.0, dampingFraction: 1.0, blendDuration: 1.0))
+        }
         .padding()
     }
 }

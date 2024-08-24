@@ -16,66 +16,33 @@ struct SotrodargalView: View {
     
     @available(iOS 16.0, *)
     var body: some View {
-        if #available(iOS 16.0, *) {
-            NavigationView {
-                VStack{
-                    
-                    
-                    List(Sections,id:\.self){Thing in
-                        NavigationLink(destination: PhraseView(value: Thing.value,title: Thing.name)) {
-                            HStack{
-                                Image(Thing.img)
-                                    .resizable()
-                                    .clipShape(Circle())
-                                    .frame(width: 95, height: 80, alignment: .center)
-                                
-                                Text(Thing.name)
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                                
-                            }
+        NavigationView {
+            VStack{
+                
+                
+                List(Sections,id:\.self){Thing in
+                    NavigationLink(destination: PhraseView(value: Thing.value,title: Thing.name)) {
+                        HStack{
+                            Image(Thing.img)
+                                .resizable()
+                                .clipShape(Circle())
+                                .frame(width: 95, height: 80, alignment: .center)
+                            
+                            Text(Thing.name)
+                                .font(.title2)
+                                .fontWeight(.bold)
+                            
                         }
-                        .listRowBackground(Color(hue: 0.581, saturation: 0.059, brightness: 1))
                     }
-                    .scrollContentBackground(.hidden)
+                    .listRowBackground(Color(hue: 0.581, saturation: 0.059, brightness: 1))
                 }
-                .navigationTitle("Sotrodargal")
+                .scrollContentBackground(.hidden)
             }
-            .navigationViewStyle(DefaultNavigationViewStyle())
-            
+            .navigationTitle("Sotrodargal")
         }
-        else {
-            NavigationView {
-                VStack{
-                    
-                    
-                    List(Sections,id:\.self){Thing in
-                        NavigationLink(destination: PhraseView(value: Thing.value,title: Thing.name)) {
-                            HStack{
-                                Image(Thing.img)
-                                    .resizable()
-                                    .clipShape(Circle())
-                                    .frame(width: 95, height: 80, alignment: .center)
-                                
-                                Text(Thing.name)
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                                
-                            }
-                        }
-                        .listRowBackground(Color(hue: 0.581, saturation: 0.059, brightness: 1))
-                    }
-                    
-                }
-                .navigationTitle("Sotrodargal")
-            }
-            .navigationViewStyle(DefaultNavigationViewStyle())
-        }
+        .navigationViewStyle(DefaultNavigationViewStyle())
     }
 }
-
-
-
 
 struct SotrodargalView_Previews: PreviewProvider {
     static var previews: some View {
