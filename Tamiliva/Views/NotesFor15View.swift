@@ -195,7 +195,6 @@ struct NotesFor15View: View {
                 .navigationBarItems(trailing: NavigationLink(destination: NewNotesVC(evente: $notes)){
                     Image(systemName: "plus")
                 })
-                
                 .navigationBarItems(trailing: EditButton())
             }
             .onAppear{

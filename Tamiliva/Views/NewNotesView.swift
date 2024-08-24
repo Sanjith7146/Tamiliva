@@ -54,7 +54,7 @@ struct NewNotesVC: View {
         .navigationBarTitle(Text(""), displayMode: .inline)
         .onDisappear{
             withAnimation{
-                if eventsss.name != "Title here" || eventsss.description != "Your note here" {
+                if eventsss.name != "Enter Title here" || eventsss.description != "Enter your note here" {
                     
                     evente.append(eventsss)
                 }

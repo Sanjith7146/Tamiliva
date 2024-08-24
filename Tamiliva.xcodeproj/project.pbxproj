@@ -104,9 +104,9 @@
 			children = (
 				C5B1A32427955BB3009B1537 /* TamilivaApp.swift */,
 				C5C8E93A27DDCAF300DE93FE /* Views */,
-				C5C8E93B27DDCB0F00DE93FE /* Additional Files */,
 				C5C8E93C27DDCB2900DE93FE /* Structs */,
 				C5C8E93D27DDCB4700DE93FE /* Persistence */,
+				C5C8E93B27DDCB0F00DE93FE /* Additional Files */,
 				C5B1A32827955BB6009B1537 /* Assets.xcassets */,
 				C57844FC27CE47780063638D /* Info.plist */,
 				C5B1A32A27955BB6009B1537 /* Preview Content */,

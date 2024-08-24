@@ -18,8 +18,6 @@ struct ContentView: View {
     @State var arrayWithAnswerPressed:[String] = []
     @State var wrongQuestions: [Qn] = []
     
-    
-    
     var array:[String] = []
     var body: some View {
         TabView {
